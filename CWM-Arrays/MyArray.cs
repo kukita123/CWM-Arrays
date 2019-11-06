@@ -15,6 +15,8 @@ namespace CWM_Arrays
         public MyArray(int length)
         {
             items = new int[length];
+
+            Console.WriteLine("count={0}", count);
         }
 
         public void insert(int item)
@@ -59,7 +61,7 @@ namespace CWM_Arrays
 
         //exercises:
         /*
-        1- Extend the Array class and add a new method to return the largest number. 
+        1- Extend the Array class and add a new method to return the largest and the smallest  number. 
         What is the runtime complexity of this method?  Solution: Array.max(): 
         */
         public int max()
@@ -73,6 +75,18 @@ namespace CWM_Arrays
                 }
             }
             return max;
+        }
+        public int min()
+        {
+            int min = items[0];
+            foreach (var item in items)
+            {
+                if (item < min)
+                {
+                    min = item;
+                }
+            }
+            return min;
         }
         /*
         2- Extend the Array class and add a method to return the common items in this 
