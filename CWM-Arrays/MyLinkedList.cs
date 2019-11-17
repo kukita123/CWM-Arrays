@@ -24,6 +24,8 @@ namespace CWM_Arrays
 
         private Node first;     //object   
         private Node last;      //object
+        private int size;
+
 
         private Boolean isEmpty()       
         {
@@ -42,6 +44,7 @@ namespace CWM_Arrays
                 node.next = first;  //reference to previous first object
                 first = node;       //the new node becomes the first in the list
             }
+            size++;
         }
         //addLast:
         public void addLast(int item)
@@ -57,7 +60,8 @@ namespace CWM_Arrays
             {
                 last.next = node;
                 last = node;
-            }                
+            }
+            size++;
         }    
         //indexOf:
         public int indexOf(int item)
@@ -84,9 +88,10 @@ namespace CWM_Arrays
                 throw new InvalidOperationException();
             if (first == last)  //list with one element:
             {
-                first = last = null;
-                return;
+                first = last = null;               
             }
+            else
+            {
             // if:[10 -> 20 -> 30]
             // it's enought to brake the reference between 10 -> 20:
             // 10  20 -> 30
@@ -94,9 +99,48 @@ namespace CWM_Arrays
             var second = first.next; //remembers the reference from first to second (prevent from loosing it) 
             first.next = null; //deletes the reference from first to second 
             first = second; //the new first node gets the reference from the variable second;
+            }
+            size--;
         }         
         //removeLast:
-        
-        
+        public void removeLast()
+        {
+            // if:[10 -> 20 -> 30]
+            // it's enought to brake the reference between 20 -> 30:
+            // 10 -> 20  30
+            // and 20 to become the last node
+            // we should find the node before the last and break the reference
+            // and set it's node.last to null
+            //we need the private method to find the previous node - this is private Node getPrevious(Node)
+            if (isEmpty())
+                throw new InvalidOperationException();
+            if (first == last)  //list with one element:
+            {
+                first = last = null;               
+            }
+            else
+            {
+                var previous = getPrevious(last);
+                last = previous;
+                last.next = null;
+            }          
+            size--;
+        }
+
+        private Node getPrevious(Node node)
+        {
+            var current = first;
+            while (current != null) //going through the list to find the node before the last
+            {
+                if (current.next == node) return current;//current.next is the last reference, so current is the node before the last
+                current = current.next;
+            }
+            return null;
+        }
+
+        public int listSize()
+        {
+            return size;
+        }
     }
 }
