@@ -26,7 +26,6 @@ namespace CWM_Arrays
         private Node last;      //object
         private int size;
 
-
         private Boolean isEmpty()       
         {
             return first == null;       //if object first is null -> there is no first object -> list is empty
@@ -111,7 +110,7 @@ namespace CWM_Arrays
             // and 20 to become the last node
             // we should find the node before the last and break the reference
             // and set it's node.last to null
-            //we need the private method to find the previous node - this is private Node getPrevious(Node)
+            // we need the private method to find the previous node - this is private Node getPrevious(Node)
             if (isEmpty())
                 throw new InvalidOperationException();
             if (first == last)  //list with one element:
@@ -125,6 +124,37 @@ namespace CWM_Arrays
                 last.next = null;
             }          
             size--;
+        }
+
+        public void removeItem(int item)
+        {
+            if (isEmpty())
+                throw new InvalidOperationException();
+            if (first == last)  //list with one element:
+            {
+                if(first.value != item)
+                    throw new InvalidOperationException();
+                first = last = null;                    
+            }
+            else
+            {
+                if (!contains(item))
+                    throw new InvalidOperationException();                
+                int index = 0;
+                var current = first;
+                while (current != null)
+                {
+                    if (current.value == item)
+                        break;
+                    current = current.next;
+                    index++;
+                }
+                var previous = getPrevious(current);
+                previous.next = current.next;
+                current.next = null;
+                current = null;
+                size--;
+            }                
         }
 
         private Node getPrevious(Node node)

@@ -36,15 +36,16 @@ namespace CWM_Arrays
             myList.addLast(30);
             myList.addFirst(44);
             myList.addLast(7);  //44, 10, 20, 30, 7
-            Console.WriteLine(myList.indexOf(44));
-            Console.WriteLine(myList.indexOf(10));
-            Console.WriteLine(myList.indexOf(20));
-            Console.WriteLine(myList.indexOf(30));
-            Console.WriteLine(myList.indexOf(7));
-            Console.WriteLine(myList.indexOf(4));
-            myList.removeFirst();
-            Console.WriteLine(myList.contains(7));
-            Console.WriteLine(myList.contains(4));
+            myList.removeItem(55);//44,10,20,7
+            //Console.WriteLine(myList.indexOf(44));
+            //Console.WriteLine(myList.indexOf(10));
+            //Console.WriteLine(myList.indexOf(20));
+            //Console.WriteLine(myList.indexOf(30));
+            //Console.WriteLine(myList.indexOf(7));
+            //Console.WriteLine(myList.indexOf(4));
+            //myList.removeFirst();
+            //Console.WriteLine(myList.contains(7));
+            //Console.WriteLine(myList.contains(4));
             Console.ReadKey();
            
         }
