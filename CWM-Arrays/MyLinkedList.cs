@@ -172,5 +172,20 @@ namespace CWM_Arrays
         {
             return size;
         }
+        
+        public int[] toArray()
+        {
+            int[] array = new int[size];
+            Node current = first;
+            int index = 0;
+            while (current != null)
+            {
+                array[index] = current.value;
+                index++;
+                current = current.next;
+            }
+
+            return array;
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace CWM_Arrays
             myList.addLast(30);
             myList.addFirst(44);
             myList.addLast(7);  //44, 10, 20, 30, 7
-            myList.removeItem(55);//44,10,20,7
+            myList.removeItem(30 );//44,10,20,7
             //Console.WriteLine(myList.indexOf(44));
             //Console.WriteLine(myList.indexOf(10));
             //Console.WriteLine(myList.indexOf(20));
@@ -46,6 +46,9 @@ namespace CWM_Arrays
             //myList.removeFirst();
             //Console.WriteLine(myList.contains(7));
             //Console.WriteLine(myList.contains(4));
+
+            int[] array = myList.toArray();
+            foreach (int item in array) Console.WriteLine(item);
             Console.ReadKey();
            
         }
