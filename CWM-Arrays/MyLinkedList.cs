@@ -16,7 +16,7 @@ namespace CWM_Arrays
             public Node next;
 
             //Node constructor:
-            public Node( int value)
+            public Node(int value)
             {
                 this.value = value;
             }
@@ -43,7 +43,7 @@ namespace CWM_Arrays
                 node.next = first;  //reference to previous first object
                 first = node;       //the new node becomes the first in the list
             }
-            size++;
+            size++; //!!!
         }
         //addLast:
         public void addLast(int item)
@@ -60,7 +60,7 @@ namespace CWM_Arrays
                 last.next = node;
                 last = node;
             }
-            size++;
+            size++; //!!!
         }    
         //indexOf:
         public int indexOf(int item)
@@ -126,35 +126,67 @@ namespace CWM_Arrays
             size--;
         }
 
+        //public void removeItem(int item)
+        //{
+        //    if (isEmpty())
+        //        throw new InvalidOperationException();
+        //    if (first == last)  //list with one element:
+        //    {
+        //        if(first.value != item)
+        //            throw new InvalidOperationException();
+        //        first = last = null;
+        //        size--;
+        //    }
+        //    else
+        //    {
+        //        if (!contains(item))
+        //            throw new InvalidOperationException();                
+        //        int index = 0;
+        //        var current = first;
+        //        while (current != null)
+        //        {
+        //            if (current.value == item)
+        //                break;
+        //            current = current.next;
+        //            index++;
+        //        }
+        //        var previous = getPrevious(current);
+        //        previous.next = current.next;
+        //        current.next = null;
+        //        current = null;
+        //        size--;
+        //    }                
+        //}
+
         public void removeItem(int item)
         {
-            if (isEmpty())
+            if (!contains(item))
                 throw new InvalidOperationException();
-            if (first == last)  //list with one element:
+            if(first == last && first.value == item)
             {
-                if(first.value != item)
-                    throw new InvalidOperationException();
-                first = last = null;                    
+                first = last = null;
+            }
+            if (first.value == item)
+            {
+                removeFirst();
             }
             else
             {
-                if (!contains(item))
-                    throw new InvalidOperationException();                
-                int index = 0;
-                var current = first;
+                var current = first;    
                 while (current != null)
                 {
                     if (current.value == item)
+                    {
+                        var previous = getPrevious(current);
+                        previous.next = current.next;
+                        current.next = null;
+                        current = null;
                         break;
-                    current = current.next;
-                    index++;
+                    }                    
+                    current = current.next;                    
                 }
-                var previous = getPrevious(current);
-                previous.next = current.next;
-                current.next = null;
-                current = null;
-                size--;
-            }                
+            }
+            size--;
         }
 
         private Node getPrevious(Node node)
@@ -170,9 +202,9 @@ namespace CWM_Arrays
 
         public int listSize()
         {
-            return size;
+            return size;  //
         }
-        
+               
         public int[] toArray()
         {
             int[] array = new int[size];

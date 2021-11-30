@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CWM_Arrays
 {
@@ -16,7 +12,7 @@ namespace CWM_Arrays
         {
             items = new int[length];
 
-            Console.WriteLine("count={0}", count);
+            Console.WriteLine("Creating a list - start count={0}", count);
         }
 
         public void insert(int item)
@@ -27,7 +23,8 @@ namespace CWM_Arrays
                 Array.Resize(ref items, count*2);
             }
             //add the item at the end
-            items[count++] = item;            
+            items[count] = item;
+            count++;
         }
         
         public void removeAt(int index)
@@ -35,7 +32,7 @@ namespace CWM_Arrays
             //validate the index
             if (index < 0 || index >= count)
             {
-                throw new Exception();
+                throw new Exception("Wrong index!!!");
             }
             //shift the items to the left to fill the hole
             for (int i = index; i < count; i++)
@@ -61,17 +58,18 @@ namespace CWM_Arrays
 
         //exercises:
         /*
-        1- Extend the Array class and add a new method to return the largest and the smallest  number. 
+        1- Extend the Array class and add new methodс to return the largest and the smallest  number. 
         What is the runtime complexity of this method?  Solution: Array.max(): 
         */
         public int max()
         {
             int max = items[0];
-            foreach (var item in items)
+
+            for (int i = 1; i < count; i++)
             {
-                if (item>max)
+                if (items[i] > max)
                 {
-                    max = item;
+                    max = items[i];
                 }
             }
             return max;
@@ -79,13 +77,14 @@ namespace CWM_Arrays
         public int min()
         {
             int min = items[0];
-            foreach (var item in items)
+            for (int i = 1; i < count; i++)
             {
-                if (item < min)
+                if (items[i] < min)
                 {
-                    min = item;
+                    min = items[i];
                 }
             }
+ 
             return min;
         }
         /*
@@ -94,14 +93,16 @@ namespace CWM_Arrays
         */
         public MyArray intersect(MyArray other)
         {
-            var intersection = new MyArray(count); //the array to generate and return, max length=count
-            foreach (var item in items)
+            MyArray intersection = new MyArray(count); //the MyArray object to generate and return, max length=count
+
+            for (int i = 0; i < count; i++)
             {
-                if (other.indexOf(item) >= 0) //checks if item has an index in other
+                if (other.indexOf(items[i]) >= 0) //checks if items[i] has an index in other
                 {
-                    intersection.insert(item);
+                    intersection.insert(items[i]);
                 }
             }
+
             return intersection;
         }
         /*
@@ -109,20 +110,24 @@ namespace CWM_Arrays
         if the array includes [1, 2, 3, 4], after reversing and printing it, 
         we should see [4, 3, 2, 1].  Solution: Array.reverse() 
         */
+        //i = 0 => count - 1 -> count - 1 - i
+        //i = 1 => count - 2 -> count - 1 - i
+        //i = 3 => count - 4 -> count - 1 - i
         public void reverse()
         {
             int[] newRevItems = new int[count];
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < count; i++)
             {
-                newRevItems[i] = items[items.Length - 1 - i];
+                newRevItems[i] = items[count - 1 - i];
             }
             items = newRevItems;
         }
         /*
         4-  Extend the Array class and add a new method to insert an item at a given index: 
-        public void insertAt(int item, int index)Solution: Array.insertAt() 
+        public void insertAt(int item, int index)
+        // Solution: Array.insertAt() 
 
-         // Note that I've extracted the logic for resizing the array into this private
+        // Note that I've extracted the logic for resizing the array into this private
         // method so we can reuse in insert() and insertAt() methods.
         // 
         // This also made our code cleaner and more readable.
@@ -140,11 +145,12 @@ namespace CWM_Arrays
                 items = newItems;
             }
         }
+
         public void insertAt(int item, int index)
         {
             ResizeIfRequired();
             //pushes all elements after index one position back:
-            for (int i = count-1; i >= index; i--)
+            for (int i = count - 1; i >= index; i--)
             {
                 items[i + 1] = items[i];
             }
