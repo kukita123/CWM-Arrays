@@ -67,7 +67,7 @@ namespace ExerciseLists
 
             //Exercise3();
 
-            //Exercise4();
+            Exercise4();
 
             #endregion
 
@@ -77,6 +77,7 @@ namespace ExerciseLists
         public static void Exercise1()
         {
             var names = new List<string>();
+
 
             while (true)
             {

@@ -13,65 +13,65 @@ namespace CWM_Arrays
         {
             #region DynamicArray-List
 
-            MyArray arr = new MyArray(3);
-            arr.insert(10);
-            arr.insert(20);
-            arr.insert(30);
-            arr.print();
-            Console.WriteLine();
-            arr.insert(40);
-            arr.print();
-            Console.WriteLine();
-            arr.removeAt(1);
-            arr.print();
-            Console.WriteLine();
-            Console.WriteLine(arr.indexOf(30));
-            Console.WriteLine(arr.indexOf(300));
+            //MyListArray arr = new MyListArray(3);
+            //arr.Insert(10);
+            //arr.Insert(20);
+            //arr.Insert(30);
+            //arr.Print();
+            //Console.WriteLine();
+            //arr.Insert(40);
+            //arr.Print();
+            //Console.WriteLine();
+            //arr.RemoveAt(1);
+            //arr.Print();
+            //Console.WriteLine();
+            //Console.WriteLine(arr.IndexOf(30));
+            //Console.WriteLine(arr.IndexOf(300));
 
-            Console.WriteLine(arr.max());
-            Console.WriteLine(arr.min());
-            Console.WriteLine();
+            //Console.WriteLine(arr.Max());
+            //Console.WriteLine(arr.Min());
+            //Console.WriteLine();
 
-            MyArray other = new MyArray(2);
-            other.insert(20);
-            other.insert(40);
-            other.insertAt(60, 1);
-            other.print();
-            Console.WriteLine();
-            other.reverse();
-            other.print();
+            //MyListArray other = new MyListArray(2);
+            //other.Insert(20);
+            //other.Insert(40);
+            //other.InsertAt(60, 1);
+            //other.Print();
+            //Console.WriteLine();
+            //other.Reverse();
+            //other.Print();
 
-            Console.WriteLine();
-            arr.intersect(other).print();
+            //Console.WriteLine();
+            //arr.Intersect(other).Print();
+            //Console.WriteLine();
             #endregion
 
-        
+
 
             #region LinkedList
-            //MyLinkedList myList = new MyLinkedList();
-            //myList.addLast(10);
-            //myList.addLast(20);
-            //myList.addLast(30);
-            //myList.addFirst(44);
-            //myList.addLast(7);  //44, 10, 20, 30, 7
+            Console.WriteLine(  "Working with Linked List:");
+            MyLinkedList myList = new MyLinkedList();
+            myList.AddLast(10);
+            myList.AddLast(20);
+            myList.AddLast(30);
+            myList.AddFirst(44);
+            myList.AddLast(7);  //44, 10, 20, 30, 7
 
+            myList.RemoveItem(30);//44,10,20,7
+            Console.WriteLine(myList.IndexOf(44));
+            Console.WriteLine(myList.IndexOf(10));
+            Console.WriteLine(myList.IndexOf(20));
+            Console.WriteLine(myList.IndexOf(30));
+            Console.WriteLine(myList.IndexOf(7));
+            Console.WriteLine(myList.IndexOf(4));
+            myList.RemoveFirst();
+            Console.WriteLine(myList.Contains(7));
+            Console.WriteLine(myList.Contains(4));
+            myList.RemoveItem(10);
 
-
-
-
-            //myList.removeItem(30 );//44,10,20,7
-            //Console.WriteLine(myList.indexOf(44));
-            //Console.WriteLine(myList.indexOf(10));
-            //Console.WriteLine(myList.indexOf(20));
-            //Console.WriteLine(myList.indexOf(30));
-            //Console.WriteLine(myList.indexOf(7));
-            //Console.WriteLine(myList.indexOf(4));
-            //myList.removeFirst();
-            //Console.WriteLine(myList.contains(7));
-            //Console.WriteLine(myList.contains(4));
-
-            //int[] array = myList.toArray();
-            //foreach (int item in array) Console.WriteLine(item);
+            int[] array = myList.ToArray();
+            foreach (int item in array) 
+                Console.WriteLine(item);
 
             #endregion
 

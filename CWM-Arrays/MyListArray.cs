@@ -2,20 +2,19 @@
 
 namespace CWM_Arrays
 {
-    public class MyArray
+    public class MyListArray
     {
         private int[] items;
         private int count;
 
         //constructor:
-        public MyArray(int length)
+        public MyListArray(int length)
         {
             items = new int[length];
 
-            Console.WriteLine("Creating a list - start count={0}", count);
+            //Console.WriteLine("Creating a list - start count = {0}", count);
         }
-
-        public void insert(int item)
+        public void Insert(int item)
         {
             //if the array is full, resize it
             if (items.Length == count)
@@ -25,9 +24,8 @@ namespace CWM_Arrays
             //add the item at the end
             items[count] = item;
             count++;
-        }
-        
-        public void removeAt(int index)
+        }        
+        public void RemoveAt(int index)
         {
             //validate the index
             if (index < 0 || index >= count)
@@ -41,8 +39,7 @@ namespace CWM_Arrays
             }
             count--;
         }
-
-        public int indexOf(int item)
+        public int IndexOf(int item)
         {
             //if we find it, return index
             //otherwise return -1
@@ -55,13 +52,12 @@ namespace CWM_Arrays
             }
             return -1;
         }
-
         //exercises:
         /*
         1- Extend the Array class and add new methodс to return the largest and the smallest  number. 
         What is the runtime complexity of this method?  Solution: Array.max(): 
         */
-        public int max()
+        public int Max()
         {
             int max = items[0];
 
@@ -74,7 +70,7 @@ namespace CWM_Arrays
             }
             return max;
         }
-        public int min()
+        public int Min()
         {
             int min = items[0];
             for (int i = 1; i < count; i++)
@@ -91,15 +87,16 @@ namespace CWM_Arrays
         2- Extend the Array class and add a method to return the common items in this 
         array and another array.  Solution: Array.intersect(): 
         */
-        public MyArray intersect(MyArray other)
+        public MyListArray Intersect(MyListArray other)
         {
-            MyArray intersection = new MyArray(count); //the MyArray object to generate and return, max length=count
+            MyListArray intersection = new MyListArray(count); //the MyArray object to generate and return,
+                                                               //max length = count
 
             for (int i = 0; i < count; i++)
             {
-                if (other.indexOf(items[i]) >= 0) //checks if items[i] has an index in other
+                if (other.IndexOf(items[i]) >= 0) //checks if items[i] has an index in other
                 {
-                    intersection.insert(items[i]);
+                    intersection.Insert(items[i]);
                 }
             }
 
@@ -113,7 +110,7 @@ namespace CWM_Arrays
         //i = 0 => count - 1 -> count - 1 - i
         //i = 1 => count - 2 -> count - 1 - i
         //i = 3 => count - 4 -> count - 1 - i
-        public void reverse()
+        public void Reverse()
         {
             int[] newRevItems = new int[count];
             for (int i = 0; i < count; i++)
@@ -124,14 +121,13 @@ namespace CWM_Arrays
         }
         /*
         4-  Extend the Array class and add a new method to insert an item at a given index: 
-        public void insertAt(int item, int index)
-        // Solution: Array.insertAt() 
+        public void InsertAt(int item, int index)
 
+        
+       
         // Note that I've extracted the logic for resizing the array into this private
-        // method so we can reuse in insert() and insertAt() methods.
-        // 
-        // This also made our code cleaner and more readable.
-        //        
+        // method so we can reuse in Insert() and InsertAt() methods.
+        // This also made our code cleaner and more readable.      
         */
         public void ResizeIfRequired()
         {
@@ -145,8 +141,7 @@ namespace CWM_Arrays
                 items = newItems;
             }
         }
-
-        public void insertAt(int item, int index)
+        public void InsertAt(int item, int index)
         {
             ResizeIfRequired();
             //pushes all elements after index one position back:
@@ -157,8 +152,7 @@ namespace CWM_Arrays
             items[index] = item;
             count++;
         }
-
-        public void print()
+        public void Print()
         {
             for(int i=0;i<count;i++)
                 Console.WriteLine(items[i]);
