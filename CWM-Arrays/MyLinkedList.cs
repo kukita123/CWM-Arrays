@@ -19,6 +19,7 @@ namespace CWM_Arrays
             public Node(int value)
             {
                 this.value = value;
+                //this.next = null; //by default reference to next is null
             }
         }
 
@@ -26,7 +27,7 @@ namespace CWM_Arrays
         private Node last;      //object
         private int size;
 
-        private Boolean IsEmpty()       
+        private bool IsEmpty()       
         {
             return first == null;       //if object first is null -> there is no first object -> list is empty
         }
@@ -73,11 +74,22 @@ namespace CWM_Arrays
                                     //that refer to the next element)
             while (current != null)
             {
-                if (current.value == item) return index;
+                if (current.value == item) 
+                    return index;
                 current = current.next;
                 index++;
             }
             return -1;
+        }
+        public void Print()
+        {
+            var current = first;
+            while (current != null)
+            {
+                Console.Write(current.value + " ");
+                current = current.next;
+            }
+            Console.WriteLine();
         }
 
         //contains:

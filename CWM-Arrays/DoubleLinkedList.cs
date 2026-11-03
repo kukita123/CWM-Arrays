@@ -26,59 +26,91 @@ namespace CWM_Arrays
             this.head = null;
             this.tail = null;
         }
-
+        private bool IsEmpty()
+        {
+            return head == null;
+        }
         public void AddFirst(int value)
         {
             Node newNode = new Node(value);
-
-            newNode.next = head;
-            newNode.prev = null;
-
-            if (head != null)
-                head.prev = newNode;
-
-            head = newNode;
-        }
-
-        public void InsertAfter(Node previous, int value)
-        {
-            if(previous == null)
+            if (IsEmpty())
             {
-                throw new Exception("Previous can't be null");                
+                newNode.prev = null;
+                head = newNode;
+                tail = newNode;
+                return;
+            }
+            else
+            {
+                newNode.next = head;
+                head.prev = newNode;
+                head = newNode;
+                newNode.prev = null;
             }
 
-            Node newNode = new Node(value);
-
-            newNode.next = previous.next;
-
-            previous.next = newNode;
-
-            newNode.prev = previous;
-
-            if (newNode.next != null)
-                newNode.next.prev = newNode;
- 
         }
+        private Node GetPrevious(int value)
+        {
+            Node current = head;
+            while (current != null)
+            {
+                if (current.next.item == value)
+                {
+                    return current;
+                }
+                current = current.next;
+            }
+            return null;
+        }
+
+        //public void InsertAfter(int value)
+        //{
+        //    if(GetPrevious(value) == null)
+        //    {
+        //        throw new Exception("Previous can't be null");                
+        //    }
+
+        //    Node newNode = new Node(value);
+
+        //    newNode.next = previous.next;
+
+        //    previous.next = newNode;
+
+        //    newNode.prev = previous;
+
+        //    if (newNode.next != null)
+        //        newNode.next.prev = newNode;
+ 
+        //}
 
         public void AddLast(int value)
         {
             Node newNode = new Node(value);
-            Node current = head;
-
-            newNode.next = null;
-
-            if(current == null)  //empty list
+            if (IsEmpty())
             {
                 newNode.prev = null;
                 head = newNode;
+                tail = newNode;
                 return;
             }
+            else
+            {
+                tail.next = newNode;
+                newNode.prev = tail;
+                tail = newNode;
+            }
+            
+        }
+        public void Print()
+        {
+            Node current = head;
 
             while (current != null)
-                current = current.next;  //the tail - last element
-
-            current.next = newNode;
-            newNode.next = current;
+            {
+                Console.Write(current.item + " ");
+                current = current.next;
+            }
+            Console.WriteLine();
         }
     }
 }

@@ -16,12 +16,13 @@ namespace CWM_Arrays
         }
         public void Insert(int item)
         {
-            //if the array is full, resize it
-            if (items.Length == count)
-            {
-                Array.Resize(ref items, count*2);
-            }
-            //add the item at the end
+            ResizeIfRequired();
+            ////if the array is full, resize it
+            //if (items.Length == count)
+            //{
+            //    Array.Resize(ref items, count * 2);
+            //}
+            ////add the item at the end
             items[count] = item;
             count++;
         }        
@@ -30,7 +31,7 @@ namespace CWM_Arrays
             //validate the index
             if (index < 0 || index >= count)
             {
-                throw new Exception("Wrong index!!!");
+                throw new Exception("Wrong index!");  
             }
             //shift the items to the left to fill the hole
             for (int i = index; i < count; i++)
@@ -57,6 +58,15 @@ namespace CWM_Arrays
         1- Extend the Array class and add new methodс to return the largest and the smallest  number. 
         What is the runtime complexity of this method?  Solution: Array.max(): 
         */
+        public int Sum()
+        {
+            int sum = 0;
+            for (int i = 0; i < count; i++)
+            {
+                sum += items[i];
+            }
+            return sum;
+        }
         public int Max()
         {
             int max = items[0];
@@ -154,8 +164,57 @@ namespace CWM_Arrays
         }
         public void Print()
         {
-            for(int i=0;i<count;i++)
+            for (int i = 0; i < count; i++)
                 Console.WriteLine(items[i]);
+        }
+        public MyListArray Union(MyListArray other)
+        {
+            MyListArray union = new MyListArray(count);
+
+            for (int i = 0; i < count; i++)
+            {
+                union.Insert(items[i]);
+            }
+            for (int i = 0; i < other.Count; i++)
+            {
+                if(union.IndexOf(other.GetItem(i))<0)
+                    union.Insert(other.items[i]);
+            }
+            return union;
+        }
+        public MyListArray Difference(MyListArray other)
+        {
+            MyListArray difference = new MyListArray(count);
+
+            for (int i = 0; i < count; i++)
+            {
+                if (other.IndexOf(items[i]) < 0)
+                    difference.Insert(items[i]);
+            }
+            return difference;
+        }
+        public int Count
+        {
+            get { return count; }
+        }
+        public int GetItem(int index)
+        {
+            if (index < 0 || index >= count)
+            {
+                throw new Exception("Wrong index!");
+            }
+            return items[index];
+        }
+        public bool Equals(MyListArray other)
+        {
+            if (this.Count != other.Count)            
+                return false;
+            
+            for (int i = 0; i < this.count; i++)            
+                if (other.IndexOf(items[i]) < 0)
+                    return false;
+            
+            return true;
         }
     }
 }
