@@ -42,6 +42,29 @@ namespace ListVSArrayList
                 Console.WriteLine($"Element {i,-2} -> Count: {demoList.Count}, Capacity: {demoList.Capacity}");
             }
 
+            // Здадача 3: Проверка за типове и обработка на грешки при ArrayList
+            Console.WriteLine("\n=== ПРОВЕРКА ЗА ТИПОВЕ И ОБРАБОТКА НА ГРЕШКИ ПРИ ARRAYLIST ===");
+            ArrayList mixedList = new ArrayList();
+            mixedList.Add(10);
+            mixedList.Add("Hello");
+            mixedList.Add(20);
+            mixedList.Add("Bautifull");
+            mixedList.Add(30);
+            mixedList.Add("World");
+            mixedList.Add(40);        
+            
+            foreach (var item in mixedList)
+            {
+                try
+                {
+                    int number = (int)item;
+                    Console.WriteLine($"Number: {number}");
+                }
+                catch (InvalidCastException)
+                {
+                    Console.WriteLine($"Error: Cannot cast '{item}' to int.");
+                }
+            }
         }
     }
 }
